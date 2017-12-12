@@ -9,16 +9,9 @@ avatarDesc: 生活记录 | 黑科技发布
 url: "http://baixin.io"
 
 # Comment
-#comment:
+comment:
     # disqus: leopard
-#    uyan: 2151600  # 有言id,登录有言官网申请
-JB :
-  version : 0.3.0
-  BASE_PATH : false
-  ASSET_PATH : false
-
-  comments :
-    provider : custom
+    uyan: 2151600  # 有言id,登录有言官网申请
 
 # Social
 social:
