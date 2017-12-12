@@ -1,11 +1,11 @@
 # Basic
 title: 章途潮
 subtitle: 浮世三千，弱水一勺。
-description: 欢迎来到我的个人站，每日更新，欢迎收藏~
+description: 一位想文艺又华丽撞墙的浊世佳公子，不定期更新噢，爱看不看~~
 # 头像里面的标题
-avatarTitle: leopardpan
+avatarTitle: 浊世佳公子
 # 头像里面的描述
-avatarDesc: iOS / 机器学习
+avatarDesc: 生活记录 | 黑科技发布
 url: "http://baixin.io"
 
 # Comment
@@ -15,10 +15,10 @@ comment:
 
 # Social
 social:
-    weibo: 5366874726 
-    github: leopardpan
+    weibo: 吐槽啦啦啦啦 
+    github: tuchao1996
     # twitter: 
-    mail: leopardpan@icloud.com
+    mail: 372520739@qq.com
 
 # 百度统计 
 # 使用博客模板请去掉或者更换 id 

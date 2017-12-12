@@ -1,9 +1,13 @@
 ---
 layout: post
 title: "Git教程"
-date: 2016-07-13   
+date: 2017-12-10   
 tag: 工具 
 ---
+
+> 本文非原创，转载~
+> 
+> 转载请注明：[潘柏信的博客](http://baixin) » [点击阅读原文](http://baixin.io/2016/07/GitTutorial/)     
 
 ### 介绍       
 
@@ -66,6 +70,4 @@ git branc 查看时如出现
 然后切换到 dev 分支上，在使用 git branch merge temp，就可以把 temp 分支上的代码合并到 dev 上了。
 
 <br>
-
-转载请注明：[潘柏信的博客](http://baixin) » [点击阅读原文](http://baixin.io/2016/07/GitTutorial/)     
 

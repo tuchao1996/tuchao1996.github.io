@@ -1,11 +1,12 @@
 ---
 layout: post
 title: Markdown工具集
-date: 2016-11-20 
+date: 2017-12-12
 tags: 工具    
 ---
+> PS：本篇文章非原创，主要熟悉markdown写作！
 
-
+> 转载请注明：[潘柏信的博客](http://baixin) » [Markdown工具集](http://baixin.io/2016/11/markdownTool/) 
 ### 什么是 Markdown
 
 　　Markdown 是一种方便记忆、书写的纯文本标记语言，用户可以使用这些标记符号以最小的输入代价生成极富表现力的文档：如您正在阅读的这篇文章。它使用简单的符号标记不同的标题，分割不同的段落，**粗体** 或者 *斜体* 某些文字.
@@ -75,6 +76,5 @@ css 的大部分语法同样可以在 markdown 上使用，但不同的渲染器
 [DeerResume](https://github.com/geekcompany/DeerResume?utm_source=mindstore.io) 程序员专用 MarkDown 简历制作在线工具。                
 
 <br>
-
-转载请注明：[潘柏信的博客](http://baixin) » [Markdown工具集](http://baixin.io/2016/11/markdownTool/)                   
+                  
 
