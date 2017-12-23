@@ -4,6 +4,115 @@ title: python常用模块程序设计
 date: 2017-12-22
 tags: 技术交流
 ---
+# python访问限制 #
+在`Class`内部，可以有属性和方法，而外部代码可以通过直接调用实例变量的方法来操作数据，这样，就隐藏了内部的复杂逻辑。
+
+如果想让内部属性不被外部访问，可以把属性的名称前加上两个下划线__，在 Python 中，实例的变量名如果以双下划线开头`__name`，就变成了一个私有变量 (private)，只有内部可以访问，外部不能访问：
+
+举例：
+
+	class Student(object):
+	    def __init__(self, name, score):
+	        self.__name = name
+	        self.__score = score
+	    def print_score(self):
+	        print('%s: %s' % (self.__name, self.__score))
+
+改完后，对于外部代码来说，没有什么变动，但是已经无法从外部访问到实例变量`.__name`和实例变量：
+
+运行：
+
+	>>> bart = Student('Bart Simpson', 98)
+	>>> bart.__name
+	Traceback (most recent call last):
+	  File "<stdin>", line 1, in <module>
+	AttributeError: 'Student' object has no attribute '__name'
+
+这样就确保了外部代码不能随意修改对象内部的状态，这样通过访问限制的保护，代码更加健壮。
+
+如果外部还需要访问到这两个内部状态的话，可以给Student类增加`get_name`和`get_score`这样的方法。
+
+如果外部还有修改需求的话，就给该类再增加`set_score`或`set_name`方法。用这样的方式去 `get set` 一个内部保护量：
+
+	class Student(object):
+	    def get_name(self):
+	        return self.__name
+	    def get_score(self):
+	        return self.__score
+	    def set_name(self, name):
+	        self.__name = name
+	    def set_score(self, score):
+	        self.__score = score
+	    # 对于set_score(self, score)我们可以借由set方法顺便做参数检查，提高代码安全性
+	    def set_safe_score(self, score):
+	        if score >= 0 and score <= 100:
+	            self.__score = score
+	        else:
+	            raise ValueError('bad score')
+
+需要注意的是，Python 中如果变量名以双下划线开头和结尾的，是特殊变量`__XXX__`。特殊变量是可以直接从类内部访问的。
+
+有些时候，你会看到以一个下划线开头的实例变量名，比如_name，这样的实例变量外部是可以访问的，但是，按照约定俗成的规定，当你看到这样的变量时，意思就是，**“虽然我可以被访问，但是，请把我视为私有变量，不要随意访问”。**
+
+双下划线开头的实例变量是不是一定不能从外部访问呢？其实也不是。不能直接访问__name是因为 Python 解释器对外把__name变量改成了_Student__name，所以，仍然可以通过_Student__name来访问__name变量：
+
+	>>> bart._Student__name
+	'Bart Simpson'
+
+但是强烈建议你不要这么干，因为不同版本的 Python 解释器可能会把__name 改成不同的变量名。
+
+Python 的访问限制其实并不严格，主要靠自觉。
+
+# 继承和多态 #
+
+在 OOP 程序设计中，当我们定义一个 class 的时候，可以从某个现有的 class 继承，新的 class 称为子类（Subclass），而被继承的 class 称为基类、父类或超类（Base class、Super class）。
+
+比如，我们已经编写了一个名为 Animal 的 class，有一个 run() 方法可以直接打印一句话，然后新建一个叫Dog的类，继承了Animal类：
+
+	>>> class Animal(object):
+	...     def run(self):
+	...         print('running...')
+	...
+	>>> class Dog(Animal):
+	...     pass
+	...
+	>>> little_dog = Dog()
+	>>> little_dog.run()
+	running...
+
+对于 Dog 来说，Animal 就是它的父类，对于 Animal 来说，Dog 就是它的子类。
+
+子类获得了父类的全部功能。Dog() 里继承了 run() 函数，可以给自己的实例里直接用。
+
+那么问题来了，子类和父类如果定义的时候都有个run()，会发生什么？
+
+	class Animal(object):
+	    def run(self):
+	        print('running...')
+	
+	class Dog(Animal):
+	    def run(self):
+	        print("Dog running...")
+	
+	class Cat(Animal):
+	    def run(self):
+	        print("Cat running...")
+	
+	# 结果如下
+	Dog is running...
+	Cat is running...
+
+子类的的方法如果和父类的方法重名，子类会覆盖掉父类。因为这个特性，就获得了一个继承的好处” 多态”。
+
+当我们定义一个 class 的时候，实际上也就是定义了一种数据类型。跟`list str dict`(python中的数据存储也是对象哦！)一个意思。使用isinstance(待判断值, 数据类型)可以做数据类型判定。
+
+## 多态好处 ##
+
+> 多态的好处就是，当我们需要传入 Dog、Cat、Tortoise…… 时，我们只需要接收 Animal 类型就可以了，因为 Dog、Cat、Tortoise…… 都是 Animal 类型，然后，按照 Animal 类型进行操作即可。由于 Animal 类型有 run() 方法，因此，传入的任意类型，只要是 Animal 类或者子类，就会自动调用实际类型的 run() 方法，这就是多态的意思：
+
+更多python知识开始参考这篇博客，写的很好！
+
+传送门：[高级python编程基础](http://yangcongchufang.com/%E9%AB%98%E7%BA%A7python%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/python-object-class.html)
 
 # 命令行解析模块argparse简单介绍 #
 
@@ -463,3 +572,43 @@ Process之间肯定是需要通信的，操作系统提供了很多机制来实�
 * 要实现跨平台的多进程，可以使用multiprocessing模块。
 
 * 进程间通信是通过Queue、Pipes等实现的。
+
+# 运行时间记录 #
+
+python可以很方便记录程序运行的时间，`time`module。
+
+举例：
+
+	start_time = time.time()
+	print time.strftime('%Y-%m-%d %X')+' AlphaCtrl has been launched!'
+	director.run()
+	print time.strftime('%Y-%m-%d %X')+' AlphaCtrl has been terminated!'
+	stop_time = time.time()
+	print 'Running time: ' + str( round( stop_time-start_time, 2 ) ) + ' seconds.'
+
+运行，结果会显示`director.run()`运行所花的时间！
+
+# 文件输出记录 #
+
+python还可以很轻松生成报表，推荐demo如下：
+
+	class myIO():
+	    def write_fields( self, out_csv, field_list ):
+	        with open( out_csv, 'wb' ) as csv_file:
+	            writer = csv.DictWriter( csv_file, fieldnames = field_list )
+	            writer.writeheader()
+	    def write_dict_list( self, out_csv, field_list, dict_list ):
+	        if len( dict_list ) == 0:
+	            return
+	        with open( out_csv, 'ab' ) as csv_file:
+	            writer = csv.DictWriter( csv_file, fieldnames = field_list, extrasaction = 'ignore' )
+	            writer.writerows( dict_list )
+	    def write_csv( self, out_csv, field_list, dict_list ):
+	        self.write_fields( out_csv, field_list )
+	        self.write_dict_list( out_csv, field_list, dict_list )
+
+当需要生成报表时，运行`self.io.write_csv( final_report_csv, final_report_header, self.final_report )`
+
+* 第一个参数表示文件地址（包括文件名），第二个参数表示文件头，第三个参数表示数据（采用二维列表，行表示数据个数，列表示数据种类数）
+* `myIO`是报表类；`write_fields`函数是写文件头；`write_dict_list`函数是写文件数据；`write_csv`函数是生产报表。
+
