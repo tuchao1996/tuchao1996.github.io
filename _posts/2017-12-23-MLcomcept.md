@@ -7,4 +7,4 @@ tags: 技术交流
 
 # 本博客供机器学习的入门者观看
 
-<img src="C:\Users\ztchao\tuchao1996.github.io\images\posts\MLlearning\img0.jpeg" height="300" width="600">
+<img src="C:\Users\ztchao\tuchao1996.github.io\images\posts\MLlearning\img0.JPEG" height="300" width="600">
