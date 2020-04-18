@@ -11,7 +11,7 @@ tags: 生活记录
 
 更换电池后效果如下图所示：
 
-<img src="C:\Users\ztchao\tuchao1996.github.io\images\posts\0102\img0.jpg" height="200" width="200">
+![wrong](/images/posts/0102/img0.jpg)
 
 不论是实测分数，还是上手使用，系统运行的流畅度确实有不少幅度的提高。所以，这电池值得换！
 
